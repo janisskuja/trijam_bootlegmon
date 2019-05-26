@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Profile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Message.tscn" type="PackedScene" id=3]
+[ext_resource path="res://AttackMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Bootlegmon.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player_profile" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_left = 688.349
+margin_top = 389.067
+margin_right = 688.349
+margin_bottom = 389.067
+
+[node name="Enemy_profile" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_left = 20.4056
+margin_top = 19.0452
+margin_right = 20.4055
+margin_bottom = 19.0452
+
+[node name="Message" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="AttackMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
+Player = NodePath("../../Player")
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 250, 350 )
+max_hp = 20
+def = 2
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 800, 150 )
+is_enemy = true
+def = 1
+
+[node name="EnemyAtkTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="attacked" from="Player" to="." method="_on_Player_attacked"]
+[connection signal="evolved" from="Player" to="." method="_on_Player_evolved"]
+[connection signal="faint" from="Player" to="." method="_on_Player_faint"]
+[connection signal="run" from="Player" to="." method="_on_Player_run"]
+[connection signal="attacked" from="Enemy" to="." method="_on_Enemy_attacked"]
+[connection signal="faint" from="Enemy" to="." method="_on_Enemy_faint"]
+[connection signal="timeout" from="EnemyAtkTimer" to="." method="_on_EnemyAtkTimer_timeout"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://AttackMenu.gd" type="Script" id=1]
+
+[node name="AttackMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -80.0
+margin_bottom = -50.0
+alignment = 1
+
+[node name="Attack" type="Button" parent="HBoxContainer"]
+margin_left = 462.0
+margin_right = 518.0
+margin_bottom = 30.0
+text = "Attack!"
+
+[node name="Run" type="Button" parent="HBoxContainer"]
+margin_left = 522.0
+margin_right = 562.0
+margin_bottom = 30.0
+text = "Run!"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="pressed" from="HBoxContainer/Attack" to="." method="_on_Attack1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Run" to="." method="_on_Run_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

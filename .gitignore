@@ -1,3 +1,5 @@
+#Build directory
+builds/
 
 # Godot-specific ignores
 .import/
